@@ -1,11 +1,11 @@
 package main
 
-
+import "fmt"
 // Linked list
 
 type Node[T any] struct{
 	data T 
-	next *Node
+	next *Node[T]
 }
 
 type LinkedList[T any] struct{
@@ -15,23 +15,23 @@ type LinkedList[T any] struct{
 //insert required
 func(l *LinkedList[T]) insert(data T){
 	d:= &Node[T]{
-		data:data
+		data:data,
 	}
 	if l.head ==nil{
 		l.head = d
 	}else{
 		current:= l.head
-		for current !=nil{
+		for current.next !=nil{
 			current =current.next 
 		}
 		current.next = d
 	}
 }
 
-func(l *LinkedList)Print(){
+func(l *LinkedList[T])Print(){
 	current:= l.head
 	for current!=nil{
-		fmt.Pintf("%v -> ",current.data)
+		fmt.Printf("%v -> ",current.data)
 		current = current.next
 	}
 	fmt.Println("nil")
